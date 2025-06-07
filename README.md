@@ -7,7 +7,16 @@
 This project simulates a real-world AWS cloud security scenario focused on enforcing **least privilege access** to S3 resources using **tag-based IAM policies**, while implementing **defense-in-depth** with IP restrictions, public access blocking, and **real-time access monitoring** using CloudTrail, CloudWatch, and SNS.
 
 ---
+## ⚡ Automated Response (Lambda + DynamoDB)
 
+To simulate proactive security remediation, this project includes a Lambda-based response pipeline:
+
+- ✅ EventBridge detects public access changes to S3 (`PutBucketAcl`, `PutBucketPolicy`)
+- ✅ Lambda function automatically:
+  - Re-applies Block Public Access to the bucket
+  - Writes incident record to DynamoDB (`IP`, `username`, `eventTime`, `eventName`)
+
+This setup prevents accidental or malicious exposure of sensitive data and creates an audit trail for further analysis.
 ## 🧱 Architecture Diagram
 
 ![Architecture Diagram](./architecture-diagram.png)
