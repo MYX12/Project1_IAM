@@ -1,29 +1,30 @@
 # Project1_IAM
 
-# 🔐 Project 1: IAM Least Privilege with Tag-Based S3 Access and Real-Time Monitoring
+#  Project 1: IAM Least Privilege with Tag-Based S3 Access and Real-Time Monitoring
 
-## 🎯 Objective
+##  Objective
 
 This project simulates a real-world AWS cloud security scenario focused on enforcing **least privilege access** to S3 resources using **tag-based IAM policies**, while implementing **defense-in-depth** with IP restrictions, public access blocking, and **real-time access monitoring** using CloudTrail, CloudWatch, and SNS.
 
 ---
-## ⚡ Automated Response (Lambda + DynamoDB)
+## Automated Response (Lambda + DynamoDB)
 
 To simulate proactive security remediation, this project includes a Lambda-based response pipeline:
 
-- ✅ EventBridge detects public access changes to S3 (`PutBucketAcl`, `PutBucketPolicy`)
-- ✅ Lambda function automatically:
+- EventBridge detects public access changes to S3 (`PutBucketAcl`, `PutBucketPolicy`)
+- Lambda function automatically:
   - Re-applies Block Public Access to the bucket
   - Writes incident record to DynamoDB (`IP`, `username`, `eventTime`, `eventName`)
 
 This setup prevents accidental or malicious exposure of sensitive data and creates an audit trail for further analysis.
-## 🧱 Architecture Diagram
+##  Architecture Diagram
 
-![Architecture Diagram](./architecture-diagram.png)
+![image](https://github.com/user-attachments/assets/89f1957e-52d0-43ad-b36c-1a2eee3dc03b)
+
 
 ---
 
-## 🛠️ AWS Services Used
+## 🛠 AWS Services Used
 
 - AWS IAM  
 - Amazon S3 (with server-side encryption and tags)  
@@ -34,7 +35,7 @@ This setup prevents accidental or malicious exposure of sensitive data and creat
 
 ---
 
-## 🔑 Key Features
+##  Key Features
 
 - ✅ IAM policy enforces tag-based access control (`s3:ResourceTag`)
 - ✅ Bucket encrypted with server-side encryption (SSE)
