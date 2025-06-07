@@ -1,0 +1,46 @@
+import boto3
+import json
+import time
+
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('GuardDutyAttackers')
+SNS_TOPIC_ARN = "arn:aws:sns:ap-southeast-1:209479264082:Project2S3AlarmTopic"  
+
+
+def lambda_handler(event, context):
+    print(event)
+    try:
+        # 提取 IP
+        attacker_ip = event['detail']['service']['action']['remoteIpDetails']['ipAddressV4']
+    except KeyError:
+        attacker_ip = "unknown"
+
+    # 获取 Finding 类型 和 当前时间戳
+    finding_type = event['detail'].get('type', 'unknown')
+    timestamp = string(time.time())
+
+    # 写入 DynamoDB
+    try:
+        response = table.put_item(
+            Item={
+                'attackerIP': attacker_ip,
+                'timestamp': timestamp,
+                'findingType': finding_type
+            }
+        )
+        print(f"[✔] IP logged to DynamoDB: {attacker_ip}")
+        message = f"[AUTO-RESPONSE] Detected an unknown ip address, put it into DB for verification: {table}"
+        print(message)
+        # 发 SNS 邮件
+        sns.publish(
+            TopicArn=SNS_TOPIC_ARN,
+            Subject="GuardDuty Alert: S3 Public Access Block Restored",
+            Message=message
+        )
+    except Exception as e:
+        print(f"[✖] Failed to log IP: {str(e)}")
+
+    return {
+        'statusCode': 200,
+        'body': json.dumps(f"Logged IP: {attacker_ip}")
+    }
