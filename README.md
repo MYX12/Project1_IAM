@@ -20,7 +20,7 @@ This project simulates a real-world AWS cloud security scenario focused on enfor
 - Amazon S3 (with server-side encryption and tags)  
 - AWS CloudTrail (with S3 Data Events)  
 - Amazon CloudWatch Logs  
-- CloudWatch Metric Filters and Alarms  
+- CloudWatch Metric Filters and Alarms, GuardDuty
 - Amazon SNS (email notification)
 
 ---
