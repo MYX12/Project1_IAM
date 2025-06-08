@@ -19,7 +19,8 @@ To simulate proactive security remediation, this project includes a Lambda-based
 This setup prevents accidental or malicious exposure of sensitive data and creates an audit trail for further analysis.
 ##  Architecture Diagram
 
-![image](https://github.com/user-attachments/assets/89f1957e-52d0-43ad-b36c-1a2eee3dc03b)
+
+![Untitled](https://github.com/user-attachments/assets/0defa20f-603e-411d-bd17-bc271727f191)
 
 
 ---
