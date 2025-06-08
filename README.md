@@ -18,7 +18,12 @@ To simulate proactive security remediation, this project includes a Lambda-based
 
 This setup prevents accidental or malicious exposure of sensitive data and creates an audit trail for further analysis.
 ##  Architecture Diagram
-
+Key Flows:
+- Tag-based access control with IAM policy
+- `GetObject` action is logged by CloudTrail and streamed to CloudWatch
+- Metric filter + alarm triggers email alert on suspicious access
+- Real-time detection of public bucket via EventBridge
+- Lambda automatically re-applies “Block Public Access” and logs IP
 
 ![Untitled](https://github.com/user-attachments/assets/0defa20f-603e-411d-bd17-bc271727f191)
 
